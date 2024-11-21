@@ -19,3 +19,16 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background: #d1d1d1; /* Slightly darker on hover */
+}
+
+.swiper-button-prev svg,
+.swiper-button-next svg {
+  color: #555; /* Icon Color */
+  width: 10px; /* Icon Size */
+  height: 10px;
+}
