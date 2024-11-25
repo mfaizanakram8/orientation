@@ -1,5 +1,7 @@
+'use client';
 import React from "react";
 import Image from "next/image";
+import { useCart } from '@/context/CartContext';
 
 import xImage from "@/components/images/Cart (1).png";
 import cImage from "@/components/images/Cart.png";
@@ -10,6 +12,8 @@ import pImage from "@/components/images/Frame 620.png";
 const productImages = [xImage, cImage, vImage, bImage]; 
 
 const ThisMonth = () => {
+  const { addToCart } = useCart();
+  
   return (
     <div className="h-auto bg-gray-50 flex flex-col items-center w-full py-10">
       <div className="flex flex-col w-full max-w-6xl px-4">
@@ -45,7 +49,15 @@ const ThisMonth = () => {
                   
                   {/* Add to Cart Button (Appears on Hover) */}
                   <div className="absolute bottom-0 left-0 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="bg-black text-white py-2 w-full text-center">
+                    <button 
+                      className="bg-black text-white py-2 w-full text-center"
+                      onClick={() => addToCart({
+                        id: index + 1,
+                        name: `Product ${index + 1}`,
+                        price: (Math.random() * 100 + 100).toFixed(2),
+                        image: productImages[index % productImages.length]
+                      })}
+                    >
                       Add to Cart
                     </button>
                   </div>

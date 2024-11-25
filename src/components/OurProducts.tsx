@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import Image from "next/image";
 import leftArrow from "@/components/images/Fill With Left Arrow.png";
@@ -7,6 +8,7 @@ import cImage from "@/components/images/Cart (6).png";
 import vImage from "@/components/images/Cart (5).png";
 import bImage from "@/components/images/Cart (4).png";
 import pImage from "@/components/images/Frame 619.png";
+import { useCart } from '@/context/CartContext';
 
 const productImages = [xImage, cImage, vImage, bImage];
 
@@ -22,6 +24,7 @@ const productTitles = [
 ];
 
 const OurProducts = () => {
+  const { addToCart } = useCart();
   
   const renderStars = (rating: number) => {
     const stars = [];
@@ -79,7 +82,7 @@ const OurProducts = () => {
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-10">
-          {Array(20)
+          {Array(8)
             .fill(null)
             .map((_, index) => {
               const rating = Math.floor(Math.random() * 5) + 1; 
@@ -102,7 +105,15 @@ const OurProducts = () => {
 
                    
                     <div className="absolute bottom-0 left-0 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button className="bg-black text-white font-bold py-2 w-full text-center">
+                      <button 
+                        className="bg-black text-white font-bold py-2 w-full text-center"
+                        onClick={() => addToCart({
+                          id: index + 1,
+                          name: productTitles[index],
+                          price: (Math.random() * 100 + 100).toFixed(2),
+                          image: productImages[index % productImages.length]
+                        })}
+                      >
                         Add to Cart
                       </button>
                     </div>

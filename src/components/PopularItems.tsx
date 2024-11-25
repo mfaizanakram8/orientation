@@ -8,6 +8,7 @@ import product2 from '@/components/images/Frame 570 (1).png';
 import product3 from '@/components/images/Frame 570 (2).png';
 import product4 from '@/components/images/Frame 570 (3).png';
 import TImage from '@/components/images/Frame 625.png';
+import { useCart } from '@/context/CartContext';
 
 
 // Original products
@@ -50,6 +51,7 @@ const originalProducts = [
 const products = [...originalProducts, ...originalProducts, ...originalProducts]; // Repeated multiple times for looping effect
 
 const PopularItems = () => {
+  const { addToCart } = useCart();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
 
@@ -133,7 +135,15 @@ const PopularItems = () => {
 
                     {/* Add to Cart button at the bottom of the image */}
                     <div className="absolute bottom-0 left-0 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button className="bg-black text-white font-bold py-2 w-full text-center">
+                      <button 
+                        className="bg-black text-white font-bold py-2 w-full text-center"
+                        onClick={() => addToCart({
+                          id: product.id,
+                          name: product.name,
+                          price: product.price,
+                          image: product.image
+                        })}
+                      >
                         Add to Cart
                       </button>
                     </div>

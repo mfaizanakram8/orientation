@@ -1,6 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from 'swiper';
 import "swiper/css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -19,7 +20,7 @@ const devices = [
 ];
 
 const DeviceSlider = () => {
-  const swiperRef = useRef<any>(null); // Reference to the Swiper instance
+  const swiperRef = useRef<SwiperType>();
   const router = useRouter();
 
   const goToSlide = (route: string) => {
