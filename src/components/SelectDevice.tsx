@@ -1,7 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from 'swiper';
+import { Swiper as SwiperType } from 'swiper';
 import "swiper/css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -39,7 +39,9 @@ const DeviceSlider = () => {
             768: { slidesPerView: 3 },
             1024: { slidesPerView: 5 },
           }}
-          ref={swiperRef} // Set the swiper instance reference
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
         >
           {devices.map((device, index) => (
             <SwiperSlide key={index}>
@@ -60,20 +62,18 @@ const DeviceSlider = () => {
           ))}
         </Swiper>
 
-        {/* Previous Button */}
         <button
           className="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10"
           title="Previous slide"
-          onClick={() => swiperRef.current?.swiper.slidePrev()} // Custom previous slide function
+          onClick={() => swiperRef.current?.slidePrev()}
         >
           <FaChevronLeft size={10} className="text-gray-700" />
         </button>
 
-        {/* Next Button */}
         <button
           className="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-300 rounded-full w-8 h-8 flex items-center justify-center z-10"
           title="Next slide"
-          onClick={() => swiperRef.current?.swiper.slideNext()} // Custom next slide function
+          onClick={() => swiperRef.current?.slideNext()}
         >
           <FaChevronRight size={10} className="text-gray-700" />
         </button>

@@ -19,11 +19,11 @@ const HeroSection = () => {
     // Change image every 10 seconds (10,000 ms)
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 10000); // 10,000 ms = 10 seconds
+    }, 3000);
 
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <section className="bg-gray-50 py-10">

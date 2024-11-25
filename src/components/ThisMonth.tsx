@@ -11,6 +11,13 @@ import pImage from "@/components/images/Frame 620.png";
 
 const productImages = [xImage, cImage, vImage, bImage]; 
 
+const products = [
+  { id: 1, name: 'Product 1', price: '149.99' },
+  { id: 2, name: 'Product 2', price: '199.99' },
+  { id: 3, name: 'Product 3', price: '129.99' },
+  { id: 4, name: 'Product 4', price: '179.99' },
+];
+
 const ThisMonth = () => {
   const { addToCart } = useCart();
   
@@ -33,40 +40,38 @@ const ThisMonth = () => {
         {/* Grid for Product Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-14 mx-4">
           {/* Product Cards */}
-          {Array(4)
-            .fill(null)
-            .map((_, index) => (
-              <div key={index} className="flex flex-col items-center group relative">
-                <div className="relative w-full">
-                  {/* Product Image */}
-                  <Image
-                    src={productImages[index % productImages.length]}
-                    alt="Product"
-                    width={367}
-                    height={400}
-                    className="object-contain max-w-full h-auto"
-                  />
-                  
-                  {/* Add to Cart Button (Appears on Hover) */}
-                  <div className="absolute bottom-0 left-0 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button 
-                      className="bg-black text-white py-2 w-full text-center"
-                      onClick={() => addToCart({
-                        id: index + 1,
-                        name: `Product ${index + 1}`,
-                        price: (Math.random() * 100 + 100).toFixed(2),
-                        image: productImages[index % productImages.length]
-                      })}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
+          {products.map((product, index) => (
+            <div key={index} className="flex flex-col items-center group relative">
+              <div className="relative w-full">
+                {/* Product Image */}
+                <Image
+                  src={productImages[index % productImages.length]}
+                  alt={product.name}
+                  width={367}
+                  height={400}
+                  className="object-contain max-w-full h-auto"
+                />
                 
-                <h3 className="text-lg font-bold mt-2">Product {index + 1}</h3>
-                <h4>${(Math.random() * 100 + 100).toFixed(2)}</h4>
+                {/* Add to Cart Button (Appears on Hover) */}
+                <div className="absolute bottom-0 left-0 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button 
+                    className="bg-black text-white py-2 w-full text-center"
+                    onClick={() => addToCart({
+                      id: product.id,
+                      name: product.name,
+                      price: product.price,
+                      image: productImages[index % productImages.length]
+                    })}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-            ))}
+              
+              <h3 className="text-lg font-bold mt-2">{product.name}</h3>
+              <h4>${product.price}</h4>
+            </div>
+          ))}
         </div>
 
         {/* View All Button - Adjusted for Responsive Design */}
